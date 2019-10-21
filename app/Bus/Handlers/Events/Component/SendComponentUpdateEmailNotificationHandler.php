@@ -67,6 +67,12 @@ class SendComponentUpdateEmailNotificationHandler
             return;
         }
 
+        // Don't email if status is and was <= Performance Issues
+        $minStatus = intval(setting('status_for_notifications', 3));
+        if ($event->original_status < $minStatus && $event->new_status < $minStatus) {
+            return;
+        }
+
         // First notify all global subscribers.
         $globalSubscribers = $this->subscriber->isVerified()->isGlobal()->get();
 
