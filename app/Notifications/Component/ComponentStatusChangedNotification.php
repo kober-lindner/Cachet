@@ -84,7 +84,7 @@ class ComponentStatusChangedNotification extends Notification
         ]);
 
         return (new MailMessage())
-            ->subject(trans('notifications.component.status_update.mail.subject'))
+            ->subject(trans('notifications.component.status_update.mail.subject').' - '.$this->component->name)
             ->markdown('notifications.component.update', [
                 'componentName'          => $this->component->name,
                 'content'                => $content,
